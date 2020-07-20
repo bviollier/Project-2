@@ -144,70 +144,80 @@ function makeResponsive() {
         .data([data])
         .attr("d", valueline)
         .attr("fill", "none")
-        .attr("stroke", "#0FFF00");
+        .attr("stroke", "#0FFF00")
+        .attr("stroke-width", "2.5");
 
         //Add valueline2
       chartGroup.append("path")
         .data([data])
         .attr("fill", "none")
         .attr("stroke", "#80FF77")
-        .attr("d", valueline2);
+        .attr("d", valueline2)
+        .attr("stroke-width", "2.5");
 
         //3
       chartGroup.append("path")
         .data([data])
         .attr("fill", "none")
         .attr("stroke", "#001FFF")
-        .attr("d", valueline3);
+        .attr("d", valueline3)
+        .attr("stroke-width", "2.5");
 
         //4
       chartGroup.append("path")
         .data([data])
         .attr("fill", "none")
         .attr("stroke", "#6E7FFF")
-        .attr("d", valueline4);
+        .attr("d", valueline4)
+        .attr("stroke-width", "2.5");
 
         //5
       chartGroup.append("path")
         .data([data])
         .attr("fill", "none")
         .attr("stroke", "#0014A8")
-        .attr("d", valueline5);
+        .attr("d", valueline5)
+        .attr("stroke-width", "2.5");
 
         //6
       chartGroup.append("path")
         .data([data])
         .attr("fill", "none")
         .attr("stroke", "#FE2D00")
-        .attr("d", valueline6);
+        .attr("d", valueline6)
+        .attr("stroke-width", "2.5");
 
         //7
       chartGroup.append("path")
         .data([data])
         .attr("fill", "none")
         .attr("stroke", "#FF8C73")
-        .attr("d", valueline7);
+        .attr("d", valueline7)
+        .attr("stroke-width", "2.5");
 
         //8
       chartGroup.append("path")
         .data([data])
         .attr("fill", "none")
         .attr("stroke", "#AF1F00")
-        .attr("d", valueline8);
+        .attr("d", valueline8)
+        .attr("stroke-width", "2.5");
 
         //9
       chartGroup.append("path")
         .data([data])
         .attr("fill", "none")
         .attr("stroke", "#F10BE4")
-        .attr("d", valueline9);
+        .attr("d", valueline9)
+        .attr("stroke-width", "2.5");
 
         //10
       chartGroup.append("path")
         .data([data])
         .attr("fill", "none")
         .attr("stroke", "#0AAB00")
-        .attr("d", valueline10);
+        .attr("d", valueline10)
+        .attr("stroke-width", "2.5");
 
 
 
@@ -257,10 +267,10 @@ function makeResponsive() {
         .append("circle")
         .attr("cx", d => xTimeScale(d.date))
         .attr("cy", d => yLinearScale(d.avgtempGlobal))
-        .attr("r", "6")
-        .attr("fill", "blue")
-        .attr("stroke-width", "1")
-        .attr("stroke", "yellow");
+        .attr("r", "7")
+        .attr("fill", "black")
+        .attr("stroke-width", "2")
+        .attr("stroke", "red");
 
       // Date formatter to display dates nicely
       var dateFormatter = d3.timeFormat("%Y");
