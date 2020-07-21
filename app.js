@@ -14,13 +14,13 @@ function makeResponsive() {
   // SVG wrapper dimensions are determined by the current width and
   // height of the browser window.
   var svgWidth = window.innerWidth;
-  var svgHeight = window.innerHeight;
+  var svgHeight = 600;
 
   var margin = {
     top: 50,
     bottom: 50,
-    right: 50,
-    left: 50
+    right: 150,
+    left: 75
   };
 
   var height = svgHeight - margin.top - margin.bottom;
@@ -252,13 +252,18 @@ function makeResponsive() {
         )
 
       //Y label
-        chartGroup.append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 0 - margin.left)
-          .attr("x",0 - (height / 2))
-          .attr("dy", "1em")
-          .style("text-anchor", "middle")
-          .text("Average Temperature (deg Celcius)"); 
+      chartGroup.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -50)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Temperature (˚C)"); 
+
+      chartGroup.append("text")
+        .text("Average Temperature")
+        .attr("y", -10)
+        .attr("x", 325)
 
       // append circles
       var circlesGroup = chartGroup.selectAll("circle")
@@ -267,10 +272,74 @@ function makeResponsive() {
         .append("circle")
         .attr("cx", d => xTimeScale(d.date))
         .attr("cy", d => yLinearScale(d.avgtempGlobal))
-        .attr("r", "7")
-        .attr("fill", "black")
+        .attr("r", "5")
+        .attr("fill", "white")
         .attr("stroke-width", "2")
-        .attr("stroke", "red");
+        .attr("stroke", "black");
+
+      var circlesGroup2 = chartGroup.selectAll("circle2")
+        .data(data)
+        .enter()
+        .append("circle2")
+        .attr("cx", d => xTimeScale(d.date))
+        .attr("cy", d => yLinearScale(d.avgtempUSA))
+        .attr("r", "5")
+        .attr("fill", "white")
+        .attr("stroke-width", "2")
+        .attr("stroke", "black");
+
+      var toolTip2 = d3.tip()
+        .attr("class", "tooltip")
+        .offset([80, -60])
+        .html(function(d) {
+          return (`<strong>${dateFormatter(d.date)}<strong>
+          </br>--------------------------------</br>
+          Global Temp: ${d.avgtempUSA.toFixed(2)}˚C`);
+        });
+
+      chartGroup.call(toolTip2);
+
+      circlesGroup2.on("mouseover", function(d) {
+        toolTip2.show(d, this);
+      })
+        .on("mouseout", function(d) {
+          toolTip2.hide(d);
+        });
+
+      chartGroup.append("circle").attr("cx", (width + 20)).attr("cy",10).attr("r",6).style("fill","#0FFF00")
+      chartGroup.append("text").attr("x", (width + 30)).attr("y", 10).text("United States").style("font-size", "13px").attr("alignment-baseline","middle")
+      
+      chartGroup.append("circle").attr("cx", (width + 20)).attr("cy",30).attr("r",6).style("fill","#80FF77")
+      chartGroup.append("text").attr("x", (width + 30)).attr("y", 30).text("Germany").style("font-size", "13px").attr("alignment-baseline","middle")
+      
+      chartGroup.append("circle").attr("cx", (width + 20)).attr("cy",50).attr("r",6).style("fill","#0AAB00")
+      chartGroup.append("text").attr("x", (width + 30)).attr("y", 50).text("Greenland").style("font-size", "13px").attr("alignment-baseline","middle")
+      
+      chartGroup.append("circle").attr("cx", (width + 20)).attr("cy",70).attr("r",6).style("fill","#001FFF")
+      chartGroup.append("text").attr("x", (width + 30)).attr("y", 70).text("Venezuela").style("font-size", "13px").attr("alignment-baseline","middle")
+      
+      chartGroup.append("circle").attr("cx", (width + 20)).attr("cy",90).attr("r",6).style("fill","#6E7FFF")
+      chartGroup.append("text").attr("x", (width + 30)).attr("y", 90).text("Dem Congo").style("font-size", "13px").attr("alignment-baseline","middle")
+      
+      chartGroup.append("circle").attr("cx", (width + 20)).attr("cy",110).attr("r",6).style("fill","#0014A8")
+      chartGroup.append("text").attr("x", (width + 30)).attr("y", 110).text("Indonesia").style("font-size", "13px").attr("alignment-baseline","middle")
+      
+      chartGroup.append("circle").attr("cx", (width + 20)).attr("cy",130).attr("r",6).style("fill","#FE2D00")
+      chartGroup.append("text").attr("x", (width + 30)).attr("y", 130).text("Argentina").style("font-size", "13px").attr("alignment-baseline","middle")
+      
+      chartGroup.append("circle").attr("cx", (width + 20)).attr("cy",150).attr("r",6).style("fill","#FF8C73")
+      chartGroup.append("text").attr("x", (width + 30)).attr("y", 150).text("New Zealand").style("font-size", "13px").attr("alignment-baseline","middle")
+      
+      chartGroup.append("circle").attr("cx", (width + 20)).attr("cy",170).attr("r",6).style("fill","#AF1F00")
+      chartGroup.append("text").attr("x", (width + 30)).attr("y", 170).text("South Africa").style("font-size", "13px").attr("alignment-baseline","middle")
+      
+      chartGroup.append("circle").attr("cx", (width + 20)).attr("cy",190).attr("r",6).style("fill","#F10BE4")
+      chartGroup.append("text").attr("x", (width + 30)).attr("y", 190).text("Global").style("font-size", "13px").attr("alignment-baseline","middle")
+
+
+
+
+
 
       // Date formatter to display dates nicely
       var dateFormatter = d3.timeFormat("%Y");
@@ -278,10 +347,12 @@ function makeResponsive() {
       // Step 1: Initialize Tooltip
       var toolTip = d3.tip()
         .attr("class", "tooltip")
-        .offset([80, -60])
+        .offset([80, 0])
         .html(function(d) {
-          return (`<strong>${dateFormatter(d.date)}<strong><hr>Global Temp: ${d.avgtempGlobal}
-          degrees`);
+          return (`<strong>${dateFormatter(d.date)}<strong>
+          </br>--------------------------------</br>
+          Global Temp: ${d.avgtempGlobal.toFixed(2)}˚C</br>
+          5-yr Change: ${Math.round(d.five_yr_change_Global * 100)/100}˚C`);
         });
 
       // Step 2: Create the tooltip in chartGroup.
@@ -298,6 +369,7 @@ function makeResponsive() {
     }).catch(function(error) {
       console.log(error);
     });
+
 
 
 }
