@@ -48,7 +48,7 @@ function makeResponsive() {
         d.date = dateParser(d.date);
         d.avgtempUSA = +d.avgtempUSA;
         d.avgtempGermany = +d.avgtempGermany;
-        d.avgtempGreenland = +d.avgtempGreenland;
+        d.avgtempGreenland = +d.avgtempSweden;
         d.avgtempVenezuela = +d.avgtempVenezuela;
         d.avgtempDemoCongo = +d.avgtempDemoCongo;
         d.avgtempIndonesia = +d.avgtempIndonesia;
@@ -64,7 +64,7 @@ function makeResponsive() {
         .range([0, width]);
 
       var yLinearScale = d3.scaleLinear()
-        .domain([-27.5,27.5])
+        .domain([-1,27.5])
         .range([height, 0]);
 
       // create axes
@@ -135,9 +135,9 @@ function makeResponsive() {
 
       //10
       var valueline10 = d3.line()
-        .defined(function(d) { return d.avgtempGreenland != 0; })
+        .defined(function(d) { return d.avgtempSweden != 0; })
         .x(d => xTimeScale(d.date))
-        .y(d => yLinearScale(d.avgtempGreenland));
+        .y(d => yLinearScale(d.avgtempSweden));
 
       // append line
       chartGroup.append("path")
@@ -273,38 +273,9 @@ function makeResponsive() {
         .attr("cx", d => xTimeScale(d.date))
         .attr("cy", d => yLinearScale(d.avgtempGlobal))
         .attr("r", "5")
-        .attr("fill", "white")
+        .attr("fill", "#F10BE4")
         .attr("stroke-width", "2")
         .attr("stroke", "black");
-
-      var circlesGroup2 = chartGroup.selectAll("circle2")
-        .data(data)
-        .enter()
-        .append("circle2")
-        .attr("cx", d => xTimeScale(d.date))
-        .attr("cy", d => yLinearScale(d.avgtempUSA))
-        .attr("r", "5")
-        .attr("fill", "white")
-        .attr("stroke-width", "2")
-        .attr("stroke", "black");
-
-      var toolTip2 = d3.tip()
-        .attr("class", "tooltip")
-        .offset([80, -60])
-        .html(function(d) {
-          return (`<strong>${dateFormatter(d.date)}<strong>
-          </br>--------------------------------</br>
-          Global Temp: ${d.avgtempUSA.toFixed(2)}˚C`);
-        });
-
-      chartGroup.call(toolTip2);
-
-      circlesGroup2.on("mouseover", function(d) {
-        toolTip2.show(d, this);
-      })
-        .on("mouseout", function(d) {
-          toolTip2.hide(d);
-        });
 
       chartGroup.append("circle").attr("cx", (width + 20)).attr("cy",10).attr("r",6).style("fill","#0FFF00")
       chartGroup.append("text").attr("x", (width + 30)).attr("y", 10).text("United States").style("font-size", "13px").attr("alignment-baseline","middle")
@@ -313,7 +284,7 @@ function makeResponsive() {
       chartGroup.append("text").attr("x", (width + 30)).attr("y", 30).text("Germany").style("font-size", "13px").attr("alignment-baseline","middle")
       
       chartGroup.append("circle").attr("cx", (width + 20)).attr("cy",50).attr("r",6).style("fill","#0AAB00")
-      chartGroup.append("text").attr("x", (width + 30)).attr("y", 50).text("Greenland").style("font-size", "13px").attr("alignment-baseline","middle")
+      chartGroup.append("text").attr("x", (width + 30)).attr("y", 50).text("Sweden").style("font-size", "13px").attr("alignment-baseline","middle")
       
       chartGroup.append("circle").attr("cx", (width + 20)).attr("cy",70).attr("r",6).style("fill","#001FFF")
       chartGroup.append("text").attr("x", (width + 30)).attr("y", 70).text("Venezuela").style("font-size", "13px").attr("alignment-baseline","middle")
@@ -336,18 +307,14 @@ function makeResponsive() {
       chartGroup.append("circle").attr("cx", (width + 20)).attr("cy",190).attr("r",6).style("fill","#F10BE4")
       chartGroup.append("text").attr("x", (width + 30)).attr("y", 190).text("Global").style("font-size", "13px").attr("alignment-baseline","middle")
 
-
-
-
-
-
+      
       // Date formatter to display dates nicely
       var dateFormatter = d3.timeFormat("%Y");
 
       // Step 1: Initialize Tooltip
       var toolTip = d3.tip()
         .attr("class", "tooltip")
-        .offset([80, 0])
+        .offset([90, 0])
         .html(function(d) {
           return (`<strong>${dateFormatter(d.date)}<strong>
           </br>--------------------------------</br>
