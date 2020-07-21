@@ -12,7 +12,11 @@
 }
 
 body {
-	background-color: rgb(238, 238, 238);
+	background-color: rgba(238, 238, 238, 0);
+	/* background-image: url(sergey-pesterev-FRMtK1yfFsY-unsplash.jpg);
+	background: #191919; */
+	/* background-repeat: repeat-y; */
+	/* background-size: cover; */
 }
 
 .header {
@@ -30,6 +34,9 @@ body {
 	padding: 10px 30px 5px;
 	color: black;
 	background-color: white;
+	/* color: black;
+	background-image: url(sergey-pesterev-FRMtK1yfFsY-unsplash.jpg);
+	background-size: cover; */
 }
 
 #index-image {
