@@ -60,37 +60,6 @@ body {
 }
 
 
-.comparison-title {
-	text-align: center;
-	color: teal;
-	font-size: 18px;
-	font-weight: bold;
-	font-family: Georgia, Times, "Times New Roman", serif;
-}
-
-.comparison-plot-content {
-	margin-top: 10px;
-	margin-bottom: 60px;
-	margin-right: 40px;
-	margin-left: 40px;
-	padding: 10px 30px 40px;
-	color: black;
-	background-color: white;
-}
-
-#comparison-image {
-	float: left;
-	width: 85%;
-	height: 85%;
-}
-
-.table-content {
-	margin: 30px 10px 10px 10px;
-	border: 10px 10px 10px 10px;
-	padding: 10px 10px 10px 10px;
-	color: black;
-	background-color: white;
-}
 
 th {
 	background-color: white;
