@@ -46,16 +46,16 @@ function makeResponsive() {
       // parse data
       data.forEach(function(d) {
         d.date = dateParser(d.date);
-        d.avgtempUSA = +d.avgtempUSA;
-        d.avgtempGermany = +d.avgtempGermany;
-        d.avgtempGreenland = +d.avgtempSweden;
-        d.avgtempVenezuela = +d.avgtempVenezuela;
-        d.avgtempDemoCongo = +d.avgtempDemoCongo;
-        d.avgtempIndonesia = +d.avgtempIndonesia;
-        d.avgtempArgentina = +d.avgtempArgentina;
-        d.avgtempNewZealand = +d.avgtempNewZealand;
-        d.avgtempSouthAfrica = +d.avgtempSouthAfrica;
-        d.avgtempGlobal = +d.avgtempGlobal;
+        d.avgtempUSA = +d.avgtempusa;
+        d.avgtempGermany = +d.avgtempgermany;
+        d.avgtempGreenland = +d.avgtempsweden;
+        d.avgtempVenezuela = +d.avgtempvenezuela;
+        d.avgtempDemoCongo = +d.avgtempdemocongo;
+        d.avgtempIndonesia = +d.avgtempindonesia;
+        d.avgtempArgentina = +d.avgtempargentina;
+        d.avgtempNewZealand = +d.avgtempnewzealand;
+        d.avgtempSouthAfrica = +d.avgtempsouthafrica;
+        d.avgtempGlobal = +d.avgtempglobal;
       });
 
       // create scales
@@ -81,63 +81,63 @@ function makeResponsive() {
 
       //1st line
       var valueline = d3.line()
-        .defined(function(d) { return d.avgtempUSA != 0; })
+        .defined(function(d) { return d.avgtempusa != 0; })
         .x(d => xTimeScale(d.date))
-        .y(d => yLinearScale(d.avgtempUSA));
+        .y(d => yLinearScale(d.avgtempusa));
 
       //2nd line
       var valueline2 = d3.line()
-        .defined(function(d) { return d.avgtempGermany != 0; })
+        .defined(function(d) { return d.avgtempgermany != 0; })
         .x(d => xTimeScale(d.date))
-        .y(d => yLinearScale(d.avgtempGermany));
+        .y(d => yLinearScale(d.avgtempgermany));
 
       //3
       var valueline3 = d3.line()
-        .defined(function(d) { return d.avgtempVenezuela != 0; })
+        .defined(function(d) { return d.avgtempvenezuela != 0; })
         .x(d => xTimeScale(d.date))
-        .y(d => yLinearScale(d.avgtempVenezuela));
+        .y(d => yLinearScale(d.avgtempvenezuela));
 
       //4
       var valueline4 = d3.line()
-        .defined(function(d) { return d.avgtempDemoCongo != 0; })
+        .defined(function(d) { return d.avgtempdemocongo != 0; })
         .x(d => xTimeScale(d.date))
-        .y(d => yLinearScale(d.avgtempDemoCongo));
+        .y(d => yLinearScale(d.avgtempdemocongo));
 
       //5
       var valueline5 = d3.line()
-        .defined(function(d) { return d.avgtempIndonesia != 0; })
+        .defined(function(d) { return d.avgtempindonesia != 0; })
         .x(d => xTimeScale(d.date))
-        .y(d => yLinearScale(d.avgtempIndonesia));
+        .y(d => yLinearScale(d.avgtempindonesia));
 
       //6
       var valueline6 = d3.line()
-        .defined(function(d) { return d.avgtempArgentina != 0; })
+        .defined(function(d) { return d.avgtempargentina != 0; })
         .x(d => xTimeScale(d.date))
-        .y(d => yLinearScale(d.avgtempArgentina));
+        .y(d => yLinearScale(d.avgtempargentina));
 
       //7
       var valueline7 = d3.line()
-        .defined(function(d) { return d.avgtempNewZealand != 0; })
+        .defined(function(d) { return d.avgtempnewzealand != 0; })
         .x(d => xTimeScale(d.date))
-        .y(d => yLinearScale(d.avgtempNewZealand));
+        .y(d => yLinearScale(d.avgtempnewzealand));
 
       //8
       var valueline8 = d3.line()
-        .defined(function(d) { return d.avgtempSouthAfrica != 0; })
+        .defined(function(d) { return d.avgtempsouthafrica != 0; })
         .x(d => xTimeScale(d.date))
-        .y(d => yLinearScale(d.avgtempSouthAfrica));
+        .y(d => yLinearScale(d.avgtempsouthafrica));
 
       //9
       var valueline9 = d3.line()
-        .defined(function(d) { return d.avgtempGlobal != 0; })
+        .defined(function(d) { return d.avgtempglobal != 0; })
         .x(d => xTimeScale(d.date))
-        .y(d => yLinearScale(d.avgtempGlobal));
+        .y(d => yLinearScale(d.avgtempglobal));
 
       //10
       var valueline10 = d3.line()
-        .defined(function(d) { return d.avgtempSweden != 0; })
+        .defined(function(d) { return d.avgtempsweden != 0; })
         .x(d => xTimeScale(d.date))
-        .y(d => yLinearScale(d.avgtempSweden));
+        .y(d => yLinearScale(d.avgtempsweden));
 
       // append line
       chartGroup.append("path")
@@ -263,15 +263,15 @@ function makeResponsive() {
       chartGroup.append("text")
         .text("Average Temperature")
         .attr("y", -10)
-        .attr("x", 325)
+        .attr("x", 250)
 
-      // append circles
-      var circlesGroup = chartGroup.selectAll("circle")
+       // append circles
+       var circlesGroup = chartGroup.selectAll("circle")
         .data(data)
         .enter()
         .append("circle")
         .attr("cx", d => xTimeScale(d.date))
-        .attr("cy", d => yLinearScale(d.avgtempGlobal))
+        .attr("cy", d => yLinearScale(d.avgtempglobal))
         .attr("r", "5")
         .attr("fill", "#F10BE4")
         .attr("stroke-width", "2")
@@ -307,7 +307,6 @@ function makeResponsive() {
       chartGroup.append("circle").attr("cx", (width + 20)).attr("cy",190).attr("r",6).style("fill","#F10BE4")
       chartGroup.append("text").attr("x", (width + 30)).attr("y", 190).text("Global").style("font-size", "13px").attr("alignment-baseline","middle")
 
-      
       // Date formatter to display dates nicely
       var dateFormatter = d3.timeFormat("%Y");
 
@@ -318,8 +317,8 @@ function makeResponsive() {
         .html(function(d) {
           return (`<strong>${dateFormatter(d.date)}<strong>
           </br>--------------------------------</br>
-          Global Temp: ${d.avgtempGlobal.toFixed(2)}˚C</br>
-          5-yr Change: ${Math.round(d.five_yr_change_Global * 100)/100}˚C`);
+          Global Temp: ${Math.round(d.avgtempglobal * 100)/100}˚C</br>
+          5-yr Change: ${Math.round(d.five_yr_change_global * 100)/100}˚C`);
         });
 
       // Step 2: Create the tooltip in chartGroup.
@@ -349,9 +348,3 @@ makeResponsive();
 d3.select(window).on("resize", makeResponsive);
 
 
-
-
-
-
-
-//legend and box and should be done
